@@ -1,19 +1,19 @@
 import 'dart:math';
 
 import 'package:boilerplate/app/modules/example/data/user.dart';
-import 'package:boilerplate/app/modules/example/ui/user_detail_view.dart';
+import 'package:boilerplate/app/modules/example/ui/user_detail_page.dart';
 import 'package:boilerplate/app/modules/example/logic/user_list_controller.dart';
 import 'package:boilerplate/app/modules/example/logic/user_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class UserListView extends StatefulWidget {
+class UserListPage extends StatefulWidget {
 
   @override
-  _UserListViewState createState() => _UserListViewState();
+  _UserListPageState createState() => _UserListPageState();
 }
 
-class _UserListViewState extends ModularState<UserListView, UserListController> {
+class _UserListPageState extends ModularState<UserListPage, UserListController> {
   @override
   void initState() {
     controller.loadUsers();
@@ -51,7 +51,7 @@ class _UserListViewState extends ModularState<UserListView, UserListController> 
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => UserDetailsView(user: user),
+                        builder: (_) => UserDetailsPage(user: user),
                       ),
                     );
                   },

@@ -1,10 +1,10 @@
 import 'package:boilerplate/app/modules/example/data/user.dart';
 import 'package:flutter/material.dart';
 
-class UserDetailsView extends StatelessWidget {
+class UserDetailsPage extends StatelessWidget {
   final User user;
 
-  const UserDetailsView({required this.user});
+  const UserDetailsPage({required this.user});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:boilerplate/app/modules/example/logic/user_list_controller.dart';
-import 'package:boilerplate/app/modules/example/ui/user_list_view.dart';
+import 'package:boilerplate/app/modules/example/ui/user_list_page.dart';
 import 'package:boilerplate/app/modules/example/data/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,7 +12,7 @@ class ExampleMainWidget extends StatelessWidget {
     return MaterialApp(
       title: 'List/Detail Demo',
       theme: ThemeData.dark(),
-      home: UserListView(),
+      home: UserListPage(),
     );
   }
 }
