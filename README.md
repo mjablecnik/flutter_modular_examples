@@ -67,7 +67,6 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2021 [Martin Jablečník](https://github.com/mjablecnik).<br />
-This project is [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/) licensed.
-
+This project is [MIT](LICENSE) licensed.
 
 
