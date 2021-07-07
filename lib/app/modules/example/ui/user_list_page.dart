@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:boilerplate/app/modules/example/data/user.dart';
 import 'package:boilerplate/app/modules/example/ui/user_detail_page.dart';
-import 'package:boilerplate/app/modules/example/logic/user_list_controller.dart';
+import 'package:boilerplate/app/modules/example/logic/user_list_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -12,10 +12,10 @@ class UserListPage extends StatefulWidget {
   _UserListPageState createState() => _UserListPageState();
 }
 
-class _UserListPageState extends ModularState<UserListPage, UserListController> {
+class _UserListPageState extends ModularState<UserListPage, UserListStore> {
   @override
   void initState() {
-    controller.loadUsers();
+    store.loadUsers();
 
     super.initState();
   }
@@ -27,7 +27,7 @@ class _UserListPageState extends ModularState<UserListPage, UserListController> 
         title: Text('User List'),
       ),
       body: ScopedBuilder(
-        store: controller,
+        store: store,
         onLoading: (context) => Center(child: CircularProgressIndicator()),
         onError: (context, error) => Center(child: Text(error.toString())),
         onState: (BuildContext context, List<User> users) => ListView.builder(
@@ -37,7 +37,7 @@ class _UserListPageState extends ModularState<UserListPage, UserListController> 
 
             return Dismissible(
               key: ObjectKey(user),
-              onDismissed: (_) => controller.removeUser(user),
+              onDismissed: (_) => store.removeUser(user),
               background: Container(color: Colors.red),
               child: ListTile(
                 title: Text('User #${user.id}'),

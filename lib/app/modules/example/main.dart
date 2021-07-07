@@ -1,11 +1,10 @@
-import 'package:boilerplate/app/modules/example/logic/user_list_controller.dart';
+import 'package:boilerplate/app/modules/example/logic/user_list_store.dart';
 import 'package:boilerplate/app/modules/example/ui/user_list_page.dart';
 import 'package:boilerplate/app/modules/example/data/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ExampleMainWidget extends StatelessWidget {
-  final UserListController controller = Modular.get<UserListController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class ExampleMainWidget extends StatelessWidget {
 class ExampleModule extends Module {
   @override
   List<Bind> get binds => [
-     Bind.singleton((i) => UserListController()),
+     Bind.singleton((i) => UserListStore()),
      Bind.singleton((i) => UserRepository()),
   ];
 
