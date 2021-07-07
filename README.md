@@ -1,30 +1,18 @@
-# Jottings
-Flutter application for saving Notes and Todo lists.
+# Flutter Modular Boilerplate
+Flutter boilerplate application with Modular and Triple.
 
 
 ## Installation
 
   ```
-  git clone https://github.com/mjablecnik/flutter_boilerplate
-  cd flutter_boilerplate
+  git clone https://github.com/mjablecnik/flutter_modular_boilerplate
+  cd flutter_modular_boilerplate
   flutter pub get
-  flutter packages pub run build_runner build
   ```
   
 ## Features
  **Directory tree:**
- - Create/Update/Delete folders
- - Create/Update/Delete notes
- - Create/Update/Delete todo lists
- - Reordering items in main tree
-
- **Note:**
- - Automatic saving of notes 
- - Format of text
-
- **Todo List:**
- - Simple add and delete todoes in todo list 
- - Turn off visibility of checked todoes
+ - TODO: add features
 
 
 
@@ -32,9 +20,8 @@ Flutter application for saving Notes and Todo lists.
 
  - [Dart](https://dart.dev/): Client-optimized language for fast apps on any platform.
  - [Flutter](https://flutter.dev/): UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.
- - [Bloc](https://bloclibrary.dev/): A predictable state management library that helps implement the BLoC (Business Logic Component) design pattern.
- - [Hive](https://hivedb.dev/): Lightweight and blazing fast key-value database inspired by Bitcask.
- - [FlutterQuill](https://pub.dev/packages/flutter_quill): A rich text editor for Flutter.
+ - [Modular](https://pub.dev/packages/flutter_modular): Package for Automatic Memory Management, Dependency Injection, Routing and Code Modularization.
+ - [Triple](https://pub.dev/packages/flutter_triple): Implementation of the Segmented State Pattern.
 
 
 ## Screenshots
@@ -48,6 +35,8 @@ Flutter application for saving Notes and Todo lists.
  </td></tr>
  <tr><td>
    <img src="screenshots/Screenshot_1625479438.png" width="252" height="448">
+ </td><td>
+   <img src="screenshots/Screenshot_1625478498.png" width="252" height="448">
  </td><td>
    <img src="screenshots/Screenshot_1625478498.png" width="252" height="448">
  </td></tr>
