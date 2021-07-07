@@ -1,31 +1,31 @@
 import 'package:boilerplate/app/modules/example/data/user.dart';
-import 'package:boilerplate/app/modules/example/logic/user_list_state.dart';
 import 'package:boilerplate/app/modules/example/data/user_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 
-class UserListController extends ValueNotifier<UserListState> {
+class UserListController extends NotifierStore<Exception, List<User>> {
   final UserRepository repository = Modular.get<UserRepository>();
 
-  UserListController() : super(UserListState.initial());
+  UserListController() : super([]);
 
   Future<void> loadUsers() async {
-    value = UserListState.loading();
+    setLoading(true);
 
     try {
-      value = UserListState.success(await repository.users());
+      update(await repository.users());
     } catch (error) {
-      value = UserListState.error();
+      setError(Exception("Cannot load users."));
     }
+    setLoading(false);
   }
 
   Future<void> addUser(User user) async {
-    value = UserListState.success([...value.users, user]);
+    update([...this.state, user]);
     await repository.addUser(user);
   }
 
   Future<void> removeUser(User user) async {
-    value = UserListState.success(value.users..remove(user));
+    update(this.state..remove(user));
     await repository.addUser(user);
   }
 }

@@ -3,12 +3,11 @@ import 'dart:math';
 import 'package:boilerplate/app/modules/example/data/user.dart';
 import 'package:boilerplate/app/modules/example/ui/user_detail_page.dart';
 import 'package:boilerplate/app/modules/example/logic/user_list_controller.dart';
-import 'package:boilerplate/app/modules/example/logic/user_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 
 class UserListPage extends StatefulWidget {
-
   @override
   _UserListPageState createState() => _UserListPageState();
 }
@@ -27,39 +26,33 @@ class _UserListPageState extends ModularState<UserListPage, UserListController> 
       appBar: AppBar(
         title: Text('User List'),
       ),
-      body: ValueListenableBuilder<UserListState>(
-        valueListenable: controller,
-        builder: (context, model, _) {
-          if (model.loading) {
-            return Center(child: CircularProgressIndicator());
-          } else if (model.error) {
-            return Center(child: Text('Oh no! Could not load the users'));
-          }
+      body: ScopedBuilder(
+        store: controller,
+        onLoading: (context) => Center(child: CircularProgressIndicator()),
+        onError: (context, error) => Center(child: Text(error.toString())),
+        onState: (BuildContext context, List<User> users) => ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (context, index) {
+            var user = users[index];
 
-          return ListView.builder(
-            itemCount: model.users.length,
-            itemBuilder: (context, index) {
-              var user = model.users[index];
-
-              return Dismissible(
-                key: ObjectKey(user),
-                onDismissed: (_) => controller.removeUser(user),
-                background: Container(color: Colors.red),
-                child: ListTile(
-                  title: Text('User #${user.id}'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => UserDetailsPage(user: user),
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          );
-        },
+            return Dismissible(
+              key: ObjectKey(user),
+              onDismissed: (_) => controller.removeUser(user),
+              background: Container(color: Colors.red),
+              child: ListTile(
+                title: Text('User #${user.id}'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => UserDetailsPage(user: user),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
