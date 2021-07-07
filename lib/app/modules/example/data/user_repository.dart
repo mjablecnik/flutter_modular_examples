@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:boilerplate/app/modules/example/user.dart';
+import 'package:boilerplate/app/modules/example/data/user.dart';
 
 class UserRepository {
   Future<List<User>> users() {

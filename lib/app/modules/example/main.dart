@@ -1,6 +1,6 @@
-import 'package:boilerplate/app/modules/example/user_list_controller.dart';
-import 'package:boilerplate/app/modules/example/user_list_view.dart';
-import 'package:boilerplate/app/modules/example/user_repository.dart';
+import 'package:boilerplate/app/modules/example/logic/user_list_controller.dart';
+import 'package:boilerplate/app/modules/example/ui/user_list_view.dart';
+import 'package:boilerplate/app/modules/example/data/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

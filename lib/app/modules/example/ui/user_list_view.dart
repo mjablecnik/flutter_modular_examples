@@ -1,23 +1,22 @@
 import 'dart:math';
 
-import 'package:boilerplate/app/modules/example/user.dart';
-import 'package:boilerplate/app/modules/example/user_detail_view.dart';
-import 'package:boilerplate/app/modules/example/user_list_controller.dart';
-import 'package:boilerplate/app/modules/example/user_list_state.dart';
+import 'package:boilerplate/app/modules/example/data/user.dart';
+import 'package:boilerplate/app/modules/example/ui/user_detail_view.dart';
+import 'package:boilerplate/app/modules/example/logic/user_list_controller.dart';
+import 'package:boilerplate/app/modules/example/logic/user_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class UserListView extends StatefulWidget {
-  final UserListController controller = Modular.get<UserListController>();
 
   @override
   _UserListViewState createState() => _UserListViewState();
 }
 
-class _UserListViewState extends State<UserListView> {
+class _UserListViewState extends ModularState<UserListView, UserListController> {
   @override
   void initState() {
-    widget.controller.loadUsers();
+    controller.loadUsers();
 
     super.initState();
   }
@@ -29,7 +28,7 @@ class _UserListViewState extends State<UserListView> {
         title: Text('User List'),
       ),
       body: ValueListenableBuilder<UserListState>(
-        valueListenable: widget.controller,
+        valueListenable: controller,
         builder: (context, model, _) {
           if (model.loading) {
             return Center(child: CircularProgressIndicator());
@@ -44,7 +43,7 @@ class _UserListViewState extends State<UserListView> {
 
               return Dismissible(
                 key: ObjectKey(user),
-                onDismissed: (_) => widget.controller.removeUser(user),
+                onDismissed: (_) => controller.removeUser(user),
                 background: Container(color: Colors.red),
                 child: ListTile(
                   title: Text('User #${user.id}'),
@@ -65,7 +64,7 @@ class _UserListViewState extends State<UserListView> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          widget.controller.addUser(User(Random().nextInt(1000)));
+          controller.addUser(User(Random().nextInt(1000)));
         },
       ),
     );

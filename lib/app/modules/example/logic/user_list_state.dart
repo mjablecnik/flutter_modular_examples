@@ -1,4 +1,4 @@
-import 'package:boilerplate/app/modules/example/user.dart';
+import 'package:boilerplate/app/modules/example/data/user.dart';
 
 class UserListState {
   final List<User> users;
