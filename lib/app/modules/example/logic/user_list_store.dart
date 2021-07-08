@@ -3,7 +3,7 @@ import 'package:boilerplate/app/modules/example/data/user_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
-class UserListStore extends StreamStore<Exception, List<User>> {
+class UserListStore extends NotifierStore<Exception, List<User>> {
   final UserRepository repository;
 
   UserListStore(this.repository) : super([]);
