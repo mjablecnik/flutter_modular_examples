@@ -12,55 +12,69 @@ class UserListPage extends StatefulWidget {
   _UserListPageState createState() => _UserListPageState();
 }
 
-class _UserListPageState extends ModularState<UserListPage, UserListStore> {
+class _UserListPageState extends State<UserListPage> {
+  var store = Modular.get<UserListStore>();
   @override
   void initState() {
-    store.loadUsers();
-
     super.initState();
+    store.observer(
+      onState: (state) => print(state),
+    );
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+      await store.loadUsers();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    store.selectError.addListener(() => print(store.state));
     return Scaffold(
       appBar: AppBar(
         title: Text('User List'),
       ),
+      bottomNavigationBar: ElevatedButton(
+        child: Text('Load'),
+        onPressed: () {
+          store.loadUsers();
+        },
+      ),
       body: ScopedBuilder(
         store: store,
-        onLoading: (context) => Center(child: CircularProgressIndicator()),
+        onLoading: (context) {
+          return Center(child: CircularProgressIndicator());
+        },
         onError: (context, error) {
           return Center(child: Text(error.toString()));
         },
-        onState: (BuildContext context, List<User> users) => ListView.builder(
-          itemCount: users.length,
-          itemBuilder: (context, index) {
-            var user = users[index];
+        onState: (BuildContext context, List<User> users) {
+          return ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              var user = users[index];
 
-            return Dismissible(
-              key: ObjectKey(user),
-              onDismissed: (_) => store.removeUser(user),
-              background: Container(color: Colors.red),
-              child: ListTile(
-                title: Text('User #${user.id}'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => UserDetailsPage(user: user),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        ),
+              return Dismissible(
+                key: ObjectKey(user),
+                onDismissed: (_) async => await store.removeUser(user),
+                background: Container(color: Colors.red),
+                child: ListTile(
+                  title: Text('User #${user.id}'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => UserDetailsPage(user: user),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {
-          controller.addUser(User(Random().nextInt(1000)));
+        onPressed: () async {
+          await store.addUser(User(Random().nextInt(1000)));
         },
       ),
     );

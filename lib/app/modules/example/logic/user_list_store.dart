@@ -3,14 +3,13 @@ import 'package:boilerplate/app/modules/example/data/user_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
-class UserListStore extends NotifierStore<Exception, List<User>> {
-  final UserRepository repository = Modular.get<UserRepository>();
+class UserListStore extends StreamStore<Exception, List<User>> {
+  final UserRepository repository;
 
-  UserListStore() : super([]);
+  UserListStore(this.repository) : super([]);
 
   Future<void> loadUsers() async {
-    setLoading(true);
-
+    setLoading(true, force: true);
     try {
       update(await repository.users());
     } catch (error) {
@@ -20,12 +19,18 @@ class UserListStore extends NotifierStore<Exception, List<User>> {
   }
 
   Future<void> addUser(User user) async {
-    update([...this.state, user]);
+    setLoading(true);
+    await Future.delayed(Duration(seconds: 1));
     await repository.addUser(user);
+    update([...this.state, user]);
+    setLoading(false);
   }
 
   Future<void> removeUser(User user) async {
-    update(this.state..remove(user));
-    await repository.addUser(user);
+    setLoading(true);
+    await Future.delayed(Duration(seconds: 1));
+    await repository.removeUser(user);
+    update([...this.state..remove(user)]);
+    setLoading(false);
   }
 }
