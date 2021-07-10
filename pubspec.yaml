@@ -24,7 +24,7 @@ environment:
 
 dependencies:
   flutter_modular: ^3.3.0
-  flutter_triple: ^1.2.1
+  flutter_triple: ^1.2.2
   flutter:
     sdk: flutter
 

@@ -22,7 +22,7 @@ class _UserListPageState extends ModularState<UserListPage, UserListStore> {
 
   @override
   Widget build(BuildContext context) {
-    store.selectError.addListener(() => print(store.state));
+    store.selectState.addListener(() => print(store.state));
     return Scaffold(
       appBar: AppBar(
         title: Text('User List'),
@@ -30,9 +30,7 @@ class _UserListPageState extends ModularState<UserListPage, UserListStore> {
       body: ScopedBuilder(
         store: store,
         onLoading: (context) => Center(child: CircularProgressIndicator()),
-        onError: (context, error) {
-          return Center(child: Text(error.toString()));
-        },
+        onError: (context, error) => Center(child: Text(error.toString())),
         onState: (BuildContext context, List<User> users) => ListView.builder(
           itemCount: users.length,
           itemBuilder: (context, index) {
