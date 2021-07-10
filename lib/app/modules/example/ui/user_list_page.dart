@@ -22,7 +22,6 @@ class _UserListPageState extends ModularState<UserListPage, UserListStore> {
 
   @override
   Widget build(BuildContext context) {
-    store.selectState.addListener(() => print(store.state));
     return Scaffold(
       appBar: AppBar(
         title: Text('User List'),
