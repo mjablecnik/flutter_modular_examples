@@ -1,11 +1,12 @@
 import 'dart:math';
 
-import 'package:boilerplate/app/modules/example/data/user.dart';
-import 'package:boilerplate/app/modules/example/ui/user_detail_page.dart';
-import 'package:boilerplate/app/modules/example/logic/user_list_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+
+import '../data/user.dart';
+import '../ui/user_detail_page.dart';
+import '../logic/user_list_store.dart';
 
 class UserListPage extends StatefulWidget {
   @override

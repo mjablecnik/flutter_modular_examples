@@ -1,8 +1,9 @@
-import 'package:boilerplate/app/modules/example/logic/user_list_store.dart';
-import 'package:boilerplate/app/modules/example/ui/user_list_page.dart';
-import 'package:boilerplate/app/modules/example/data/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'logic/user_list_store.dart';
+import 'ui/user_list_page.dart';
+import 'data/user_repository.dart';
 
 class ExampleMainWidget extends StatelessWidget {
 

@@ -1,5 +1,6 @@
-import 'package:boilerplate/app/modules/example/data/user.dart';
 import 'package:flutter/material.dart';
+
+import '../data/user.dart';
 
 class UserDetailsPage extends StatelessWidget {
   final User user;

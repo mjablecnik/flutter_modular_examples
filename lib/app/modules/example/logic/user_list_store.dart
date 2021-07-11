@@ -1,7 +1,8 @@
-import 'package:boilerplate/app/modules/example/data/user.dart';
-import 'package:boilerplate/app/modules/example/data/user_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+
+import '../data/user.dart';
+import '../data/user_repository.dart';
 
 class UserListStore extends StreamStore<Exception, List<User>> {
   final UserRepository repository = Modular.get<UserRepository>();
