@@ -1,3 +1,4 @@
+import 'package:boilerplate/app/modules/auth/main.dart';
 import 'package:boilerplate/app/modules/example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -31,7 +32,7 @@ class AppModule extends Module {
   // Provide all the routes for your module
   @override
   List<ModularRoute> get routes => [
-    ModuleRoute('/', module: ExampleModule())
+    ModuleRoute('/', module: AuthModule())
   ];
 
 }
