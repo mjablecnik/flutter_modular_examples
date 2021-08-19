@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'logic/user_list_store.dart';
 import 'ui/login_page.dart';
-import 'data/user_repository.dart';
+import 'data/repositories/user_repository.dart';
 import 'ui/register_page.dart';
 
 class AuthMainWidget extends StatelessWidget {

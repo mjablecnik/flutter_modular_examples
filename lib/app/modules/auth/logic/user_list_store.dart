@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
-import '../data/user.dart';
-import '../data/user_repository.dart';
+import '../data/models/user.dart';
+import '../data/repositories/user_repository.dart';
 
 class UserListStore extends StreamStore<Exception, List<User>> {
   final UserRepository repository = Modular.get<UserRepository>();
