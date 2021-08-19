@@ -3,8 +3,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_validator/the_validator.dart';
 
-import '../logic/user_list_store.dart';
-import '../utils.dart';
+import '../components/password_field.dart';
+import '../../logic/user_list_store.dart';
+import '../../utils.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -49,16 +50,7 @@ class _LoginPageState extends ModularState<LoginPage, UserListStore> {
                     validator: FieldValidator.email(),
                   ),
                   SizedBox(height: 16.0),
-                  TextFormField(
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    obscureText: true,
-                    initialValue: "Test123",
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      suffixIcon: Icon(Icons.visibility),
-                    ),
+                  PasswordFormField(
                     validator: passwordFieldValidator,
                   ),
                   Expanded(

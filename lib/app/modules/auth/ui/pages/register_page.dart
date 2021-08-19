@@ -3,9 +3,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_validator/the_validator.dart';
 
-import '../data/models/user.dart';
-import '../logic/user_list_store.dart';
-import '../utils.dart';
+import '../../data/models/user.dart';
+import '../../logic/user_list_store.dart';
+import '../../utils.dart';
+import '../components/password_field.dart';
 
 class RegisterForm {
   final key = GlobalKey<FormState>();
@@ -18,6 +19,14 @@ class RegisterForm {
 
   User createUser() {
     return User(null, firstName.text, lastName.text, email.text, password.text);
+  }
+
+  FormFieldValidator<String> getPasswordValidator({bool isRepeated: false}) {
+    return (fieldValue) {
+      var result = passwordFieldValidator(fieldValue);
+      bool isSame = this.password.text == this.passwordRepeat.text;
+      return result == null && !isSame ? "Passwords are not same" : result;
+    };
   }
 
   VoidCallback getSubmit(BuildContext context, UserListStore userListStore) {
@@ -38,14 +47,6 @@ class RegisterForm {
 class RegisterPage extends StatelessWidget {
   final _form = RegisterForm();
   final _userListStore = Modular.get<UserListStore>();
-
-  FormFieldValidator<String> getPasswordValidator({bool isRepeated: false}) {
-    return (fieldValue) {
-      var result = passwordFieldValidator(fieldValue);
-      bool isSame = _form.password.text == _form.passwordRepeat.text;
-      return result == null && !isSame ? "Passwords are not same" : result;
-    };
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,30 +98,14 @@ class RegisterPage extends StatelessWidget {
                     validator: FieldValidator.email(),
                   ),
                   SizedBox(height: 16.0),
-                  TextFormField(
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      suffixIcon: Icon(Icons.visibility),
-                    ),
+                  PasswordFormField(
                     controller: _form.password,
-                    validator: this.getPasswordValidator(),
+                    validator: _form.getPasswordValidator(),
                   ),
                   SizedBox(height: 16.0),
-                  TextFormField(
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: "Repeat password",
-                      contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      suffixIcon: Icon(Icons.visibility),
-                    ),
+                  PasswordFormField(
                     controller: _form.passwordRepeat,
-                    validator: this.getPasswordValidator(isRepeated: true),
+                    validator: _form.getPasswordValidator(isRepeated: true),
                   ),
                   Center(
                     child: Padding(
@@ -156,3 +141,4 @@ class RegisterPage extends StatelessWidget {
     );
   }
 }
+
