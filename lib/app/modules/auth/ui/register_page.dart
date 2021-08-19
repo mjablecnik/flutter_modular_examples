@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:the_validator/the_validator.dart';
 
 import '../logic/user_list_store.dart';
+import '../utils.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -16,6 +17,13 @@ class _RegisterPageState extends ModularState<RegisterPage, UserListStore> {
   @override
   void initState() {
     super.initState();
+  }
+
+  FormFieldValidator<String> getPasswordValidator({bool isRepeated: false}) {
+    return (fieldValue) {
+      var result = passwordFieldValidator(fieldValue);
+      return result == null && isRepeated ? "Passwords are not same" : result;
+    };
   }
 
   @override
@@ -75,38 +83,20 @@ class _RegisterPageState extends ModularState<RegisterPage, UserListStore> {
                       contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
                       suffixIcon: Icon(Icons.visibility),
                     ),
-                    validator: FieldValidator.password(
-                      minLength: 8,
-                      shouldContainNumber: true,
-                      shouldContainCapitalLetter: true,
-                      shouldContainSmallLetter: true,
-                      errorMessage: "Password must have minimal 8 characters",
-                      onNumberNotPresent: () => "Password must contain number",
-                      onSpecialCharsNotPresent: () => "Password must contain special characters",
-                      onCapitalLetterNotPresent: () => "Password must contain capital letters",
-                    ),
+                    validator: this.getPasswordValidator(),
                   ),
                   SizedBox(height: 16.0),
                   TextFormField(
                     enableSuggestions: false,
                     autocorrect: false,
                     obscureText: true,
-                    initialValue: "Test123",
+                    initialValue: "Test45678",
                     decoration: InputDecoration(
                       labelText: "Repeat password",
                       contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
                       suffixIcon: Icon(Icons.visibility),
                     ),
-                    validator: FieldValidator.password(
-                      minLength: 8,
-                      shouldContainNumber: true,
-                      shouldContainCapitalLetter: true,
-                      shouldContainSmallLetter: true,
-                      errorMessage: "Password must have minimal 8 characters",
-                      onNumberNotPresent: () => "Password must contain number",
-                      onSpecialCharsNotPresent: () => "Password must contain special characters",
-                      onCapitalLetterNotPresent: () => "Password must contain capital letters",
-                    ),
+                    validator: this.getPasswordValidator(isRepeated: true),
                   ),
                   Center(
                     child: Padding(

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:the_validator/the_validator.dart';
 
 import '../logic/user_list_store.dart';
+import '../utils.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -58,16 +59,7 @@ class _LoginPageState extends ModularState<LoginPage, UserListStore> {
                       contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
                       suffixIcon: Icon(Icons.visibility),
                     ),
-                    validator: FieldValidator.password(
-                      minLength: 8,
-                      shouldContainNumber: true,
-                      shouldContainCapitalLetter: true,
-                      shouldContainSmallLetter: true,
-                      errorMessage: "Password must have minimal 8 characters",
-                      onNumberNotPresent: () => "Password must contain number",
-                      onSpecialCharsNotPresent: () => "Password must contain special characters",
-                      onCapitalLetterNotPresent: () => "Password must contain capital letters",
-                    ),
+                    validator: passwordFieldValidator,
                   ),
                   Expanded(
                     child: Row(
