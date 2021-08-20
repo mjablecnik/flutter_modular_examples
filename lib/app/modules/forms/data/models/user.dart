@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/widgets.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../utils.dart';
 
-class Address {
+class Address extends Equatable {
   final String street;
   final String district;
   final String city;
@@ -13,26 +14,38 @@ class Address {
   final String country;
 
   Address(this.street, this.district, this.city, this.county, this.postalCode, this.country);
+
+  @override
+  List<Object?> get props => [street, district, city, county, postalCode, country];
+
+  @override
+  bool get stringify => true;
 }
 
-class Profile {
-  FileImage? avatar;
-  DateTime? birthday;
-  Gender? gender;
-  String? favoriteColor;
-  File? file;
-  String? cardNumber;
+class Profile extends Equatable {
+  final FileImage? avatar = null;
+  final DateTime? birthday = null;
+  final Gender? gender = null;
+  final String? favoriteColor = null;
+  final File? file = null;
+  final String? cardNumber = null;
+
+  @override
+  List<Object?> get props => [avatar, birthday, gender, favoriteColor, file, cardNumber];
+
+  @override
+  bool get stringify => true;
 }
 
-class User {
+class User extends Equatable {
   final int? id;
   final String firstName;
   final String lastName;
   final String password;
   final String email;
   final String phone;
-  Address? address;
-  Profile? profile;
+  final Address? address;
+  final Profile? profile;
 
   User(
     this.id,
@@ -46,12 +59,8 @@ class User {
   });
 
   @override
-  String toString() {
-    return "User( "
-        "Name: ${this.firstName}; "
-        "Surname: ${this.lastName}; "
-        "Email: ${this.email}; "
-        "Password: ${this.password}; "
-        ")";
-  }
+  List<Object?> get props => [id, firstName, lastName, password, email, phone, address, profile];
+
+  @override
+  bool get stringify => true;
 }
