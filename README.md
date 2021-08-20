@@ -1,12 +1,12 @@
-# Flutter Modular Boilerplate
-Flutter boilerplate application with Modular and Triple.
+# Flutter Modular Examples
+Flutter examples application with Modular and Triple.
 
 
 ## Installation
 
   ```
-  git clone https://github.com/mjablecnik/flutter_modular_boilerplate
-  cd flutter_modular_boilerplate
+  git clone https://github.com/mjablecnik/flutter_modular_examples
+  cd flutter_modular_examples
   flutter pub get
   ```
   

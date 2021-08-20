@@ -1,6 +1,6 @@
-import 'package:boilerplate/app/modules/auth/main.dart';
-import 'package:boilerplate/app/modules/example/main.dart';
-import 'package:boilerplate/app/modules/forms/main.dart';
+import 'package:modular_examples/app/modules/auth/main.dart';
+import 'package:modular_examples/app/modules/example/main.dart';
+import 'package:modular_examples/app/modules/forms/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
